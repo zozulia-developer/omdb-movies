@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -17,7 +18,13 @@ class Actor(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    year = models.PositiveIntegerField()
+    year = models.PositiveIntegerField(
+        default=2024,
+        validators=[
+            MinValueValidator(1900),
+            MaxValueValidator(9999)
+        ]
+    )
     director = models.ForeignKey(Director, on_delete=models.CASCADE, related_name='movies')
     actors = models.ManyToManyField(Actor, related_name='movies')
 

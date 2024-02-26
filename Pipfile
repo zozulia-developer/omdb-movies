@@ -10,6 +10,8 @@ djangorestframework = "*"
 django-filter = "*"
 django-environ = "*"
 drf-yasg = "*"
+djangorestframework-simplejwt = "*"
+pre-commit = "*"
 
 [dev-packages]
 

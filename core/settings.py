@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from datetime import timedelta
+
 import environ
 
 from pathlib import Path
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # apps
+    'users',
     'movies',
 ]
 
@@ -137,8 +140,7 @@ STATIC_URL = 'staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "templates/movies/css",
+    os.path.join(BASE_DIR, 'templates'),
 ]
 
 # Default primary key field type
@@ -146,11 +148,24 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'users.User'
+
 OMDB_API_KEY = env('OMDB_API_KEY')
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 25,
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 SWAGGER_SETTINGS = {
@@ -162,4 +177,9 @@ SWAGGER_SETTINGS = {
             'in': 'header'
         }
     },
+    'SECURITY_REQUIREMENTS': [
+        {
+            'Token': []
+        }
+    ],
 }
