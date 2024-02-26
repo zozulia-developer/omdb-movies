@@ -1,8 +1,8 @@
 import requests
-from django.core.management import BaseCommand
 from django.conf import settings
+from django.core.management import BaseCommand
 
-from movies.models import Movie, Director, Actor
+from movies.models import Actor, Director, Movie
 
 
 class Command(BaseCommand):

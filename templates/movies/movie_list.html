@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Movies List{% endblock %}
+{% block title %}Movies List{% endblock title %}
 
 {% block content %}
 <h1 class="mt-5">Movies List</h1>
@@ -17,7 +17,7 @@
     <ul class="pagination justify-content-center">
         {% if page_obj.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page=1">&laquo; First</a>
+            <a class="page-link" href="?page=1">« First</a>
         </li>
         <li class="page-item">
             <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
@@ -39,10 +39,10 @@
             <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last »</a>
         </li>
         {% endif %}
     </ul>
     {% endif %}
 </div>
-{% endblock %}
+{% endblock content %}

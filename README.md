@@ -36,7 +36,7 @@ python manage.py runserver
 
 ## Usage of fetching data from OMDB
 
-To fetch movie data from the OMDB API and save it to the database, you can use the `fetch_movie` management command. 
+To fetch movie data from the OMDB API and save it to the database, you can use the `fetch_movie` management command.
 
 Run the following command, replacing `<movie title>` with the title of the movie you want to fetch:
 

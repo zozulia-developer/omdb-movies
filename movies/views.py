@@ -1,5 +1,5 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.views.generic import ListView, DetailView, TemplateView
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.views.generic import DetailView, ListView, TemplateView
 
 from movies.models import Movie
 
