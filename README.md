@@ -64,3 +64,8 @@ curl -X POST http://localhost:8000/api/token/ \
   -H "Content-Type: application/json" \
   -d '{"email": "your_email", "password": "your_password"}'
 ```
+1. Copy the JWT token from the response.
+2. In the Swagger UI, click on the "Authorize" button in the top right corner.
+3. Enter `Bearer <your_jwt_token_here>` in the "Value" field and click "Authorize".
+4. Replace `<your_jwt_token_here>` with the JWT token obtained from the token endpoint.
+5. You can now access and test authenticated endpoints in Swagger by sending requests with the JWT token in the Authorization header.
