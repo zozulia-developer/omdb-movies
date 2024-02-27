@@ -1,4 +1,8 @@
+from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
+User = get_user_model()
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -15,10 +19,15 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('email', 'password1', 'password2')
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        print(self.fields, flush=True)
-        self.fields['username'].widget.attrs.update({
+        self.fields['email'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Enter your email address'
         })

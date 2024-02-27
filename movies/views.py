@@ -1,6 +1,8 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.views.generic import DetailView, ListView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
+from movies.forms import AddMovieForm, EditMovieForm
 from movies.models import Movie
 
 
@@ -13,6 +15,9 @@ class MovieListView(ListView):
     template_name = 'home.html'
     context_object_name = 'movies'
     paginate_by = 25
+
+    def get_queryset(self):
+        return Movie.objects.order_by('title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,3 +38,22 @@ class MovieDetailView(DetailView):
     model = Movie
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
+
+
+class AddMovieView(CreateView):
+    model = Movie
+    form_class = AddMovieForm
+    template_name = 'movies/add_movie.html'
+    success_url = reverse_lazy('home')
+
+
+class MovieUpdateView(UpdateView):
+    model = Movie
+    form_class = EditMovieForm
+    template_name = 'movies/edit_movie.html'
+    success_url = reverse_lazy('home')
+
+
+class MovieDeleteView(DeleteView):
+    model = Movie
+    success_url = reverse_lazy('home')

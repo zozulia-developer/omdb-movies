@@ -31,6 +31,7 @@
                     {% if user.is_authenticated %}
                     <form class="d-flex" action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
+                        <span class="navbar-text me-2"><strong>Welcome, {{ user.email }} !</strong></span>
                         <button class="btn btn-outline-danger me-2" type="submit">Logout</button>
                     </form>
                     {% else %}
